@@ -1,0 +1,15 @@
+*.ipynb
+
+api_key.py
+
+generated_images/
+
+generated_poems/
+
+generated_music/
+
+.idea/
+
+benchmark_tasks/openagi_data/
+
+automata_log/
