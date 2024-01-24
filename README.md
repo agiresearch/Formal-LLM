@@ -1,2 +1,2 @@
-# ControlAgent
-ControlAgent: Integrating Formal Language and Natural Language for Controllable LLM-based AI Agents
+# Formal-LLM
+Formal-LLM: Integrating Formal Language and Natural Language for Controllable Large Language Model Agents
