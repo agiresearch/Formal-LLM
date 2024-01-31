@@ -25,3 +25,8 @@ transformers==4.28.0
 undecorated==0.3.0
 wandb==0.14.2
 langchain==0.0.153
+torchmetrics==1.2.1
+bert-score==0.3.13
+timm==0.9.12
+openai==1.3.7
+accelerate==0.23.0
