@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 4. The codes for the real-world tasks are in the *Formal/src/realworld_tasks* folder, and the codes for benchmark tasks are in the *Formal/src/open_source* and *Formal/src/closed_source* folders. Specifically, the *open_source* LLMs include Flan-T5-large, Vicuna-7B, and LLaMA-2-13B. The *closed_source* LLMs include GPT-3.5-turbo, Claude-2, and GPT-4.
 
-5. Before running any codes, you need replace "YOUR OPENAI KEY", "HUGGINGFACE TOKEN", and "YOUR CLAUDE TOKEN", with your OpenAI, Huggingface, and Claude API keys, respectively.
+5. Before running any codes, you need replace "YOUR OPENAI TOKEN", "HUGGINGFACE TOKEN", and "YOUR CLAUDE TOKEN", with your OpenAI, Huggingface, and Claude API keys, respectively.
 
 6. Make sure you are in the *Formal/src* folder before running the codes. Otherwise,
 
