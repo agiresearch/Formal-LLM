@@ -120,7 +120,6 @@ while True:
                      f"Indoor activities: house cleaning needs 1 hour; homework needs three hours; turning on the washer/laundry machine needs 0 minutes but needs to stay home for one hour.\n\n"\
                      f"Other constrain:\n"\
                      f"Cannot play basketball within an hour after a meal.\n" \
-                     f"Each meal must be separated by at least 3 hours.\n"\
                      f"\n{plan_string}"\
                      f"Let's start planning from the end. Decide on the activity ending at {current_hour}:00.\n\n"\
                      f"Here are possible options:\n\n"\

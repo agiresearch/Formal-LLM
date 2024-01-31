@@ -1,25 +1,26 @@
 # Formal-LLM
 
-Formal-LLM: Integrating Formal Language and Natural Language for Controllable Large Language Model Agents.
+This repository includes the implementation for paper "Formal-LLM: Integrating Formal Language and Natural Language for Controllable Large Language Model Agents".
 
 ## Requirements
 
 - Python==3.9
-- PyTorch==1.12.1
+- PyTorch==1.13.1
 - transformers==4.28.0
 - langchain==0.0.153
+- peft==0.7.1
 
 ## Usage
 
 0. Clone this repo.
 
-1. Create a conda virtual environment and install the Pytorch matching your CUDA version. For example, for CUDA version 11.6:
+1. Create a conda virtual environment and install the Pytorch matching your CUDA version. For example, for CUDA version 11.7:
 
 ```
 conda create -n your_env_name python=3.9
 conda activate your_env_name
 
-conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.6 -c pytorch -c conda-forge
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 
 2. Install necessary packages:

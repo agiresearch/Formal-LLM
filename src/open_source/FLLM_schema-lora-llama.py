@@ -5,9 +5,9 @@ from transformers import (
     T5ForConditionalGeneration,
 )
 import os
-os.chdir('../')
+os.chdir('./')
 import sys
-sys.path.append('../')
+sys.path.append('./')
 print(sys.path)
 from generate_model_seq import SeqGen
 import torch.optim as optim

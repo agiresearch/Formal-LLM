@@ -5,9 +5,9 @@ from transformers import (
     T5ForConditionalGeneration,
 )
 import os
-os.chdir('../')
+os.chdir('./')
 import sys
-sys.path.append('../')
+sys.path.append('./')
 print(sys.path)
 from generate_model_seq import SeqGen
 import torch.optim as optim
@@ -98,7 +98,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModel, BitsAnd
 device = 'cuda:0'
 
 tokenizer = T5Tokenizer.from_pretrained(args.model_name, cache_dir=args.cache_dir)
-model = T5ForConditionalGeneration.from_pretrained(args.ckp_dir, cache_dir=args.cache_dir, device_map='auto')
+model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir=args.cache_dir, device_map='auto')
 
 model.gradient_checkpointing_enable()
 model = prepare_model_for_int8_training(model)
@@ -106,7 +106,7 @@ model = prepare_model_for_int8_training(model)
 lora_r = 8
 lora_alpha = 16
 lora_dropout = 0.05
-lora_target_modules = ["q_proj","v_proj"]
+lora_target_modules = ["q","v"]
 
 config = LoraConfig(
     r=lora_r,
@@ -229,9 +229,10 @@ for i, task_description in enumerate(training_tasks):
     
             input_ids = seqGen.tokenizer.batch_encode_plus([prompt], padding="longest", return_tensors="pt")["input_ids"]
             input_ids = input_ids.to(device)
-            output = seqGen.model.generate(input_ids, max_length=30, min_length=1, return_dict_in_generate=True, output_scores=True, 
+            inputs = dict(input_ids=input_ids, max_new_tokens=30, min_length=1, return_dict_in_generate=True, output_scores=True, 
                                              output_hidden_states=True, renormalize_logits=True, temperature=1, top_k=5, top_p=0.5,
                                              num_return_sequences=1)
+            output = seqGen.model.generate(**inputs)
             output_ids = output["sequences"][:, 1:]
             output_sequence = [s.replace("<pad>", "").replace("</s>", "") for s in seqGen.tokenizer.batch_decode(output_ids)]
             logging.info(output_sequence)
@@ -429,9 +430,10 @@ for e in range(epochs):
     
             input_ids = seqGen.tokenizer.batch_encode_plus([prompt], padding="longest", return_tensors="pt")["input_ids"]
             input_ids = input_ids.to(device)
-            output = seqGen.model.generate_with_grad(input_ids, max_length=30, min_length=1, return_dict_in_generate=True, output_scores=True, 
-                                                     output_hidden_states=True, renormalize_logits=True, temperature=1, top_k=5, top_p=0.5,
-                                                     num_return_sequences=1)
+            inputs = dict(input_ids=input_ids, max_new_tokens=5, min_length=1, return_dict_in_generate=True, output_scores=True, 
+                                            output_hidden_states=True, renormalize_logits=True, temperature=1, top_k=5, top_p=0.5,
+                                            num_return_sequences=1)
+            output = seqGen.model.generate_with_grad(**inputs)
             output_ids = output["sequences"][:, 1:]
             output_sequence = [s.replace("<pad>", "").replace("</s>", "") for s in seqGen.tokenizer.batch_decode(output_ids)]
             logging.info(output_sequence)
@@ -642,9 +644,10 @@ for i, task_description in enumerate(test_tasks):
     
             input_ids = seqGen.tokenizer.batch_encode_plus([prompt], padding="longest", return_tensors="pt")["input_ids"]
             input_ids = input_ids.to(device)
-            output = seqGen.model.generate(input_ids, max_length=30, min_length=1, return_dict_in_generate=True, output_scores=True, 
+            inputs = dict(input_ids=input_ids, max_new_tokens=5, min_length=1, return_dict_in_generate=True, output_scores=True, 
                                              output_hidden_states=True, renormalize_logits=True, temperature=1, top_k=5, top_p=0.5,
                                              num_return_sequences=1)
+            output = seqGen.model.generate_with_grad(**inputs)
             output_ids = output["sequences"][:, 1:]
             output_sequence = [s.replace("<pad>", "").replace("</s>", "") for s in seqGen.tokenizer.batch_decode(output_ids)]
             logging.info(output_sequence)
