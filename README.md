@@ -1,5 +1,18 @@
 # Formal-LLM: Integrating Formal Language and Natural Language for Controllable LLM-based Agents
 
+## Citation
+
+```
+@misc{li2024formalllm,
+      title={Formal-LLM: Integrating Formal Language and Natural Language for Controllable LLM-based Agents}, 
+      author={Zelong Li and Wenyue Hua and Hao Wang and He Zhu and Yongfeng Zhang},
+      year={2024},
+      eprint={2402.00798},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+```
+
 ## Requirements
 
 - Python==3.9
