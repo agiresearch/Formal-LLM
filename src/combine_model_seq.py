@@ -485,7 +485,7 @@ class SeqCombine:
     def machine_translation(self, sentences, device):
         """
         input:
-            sentences: list of Englisth strings
+            sentences: list of English strings
         output:
             translated_text: list of German strings
         """
