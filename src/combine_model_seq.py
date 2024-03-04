@@ -300,7 +300,6 @@ class SeqCombine:
             # colorized_img = Image.fromarray(norm_out_img,'RGB')
             # temp_imgs.append(torch.from_numpy(np.array(colorized_img)).permute(2,0,1))
             temp_imgs.append(torch.from_numpy(norm_out_img).permute(2,0,1))
-        # temp_imgs = torch.stack(temp_imgs)
         return temp_imgs
     
     def image_object_detect(self, imgs, device):
@@ -362,7 +361,6 @@ class SeqCombine:
         """
         batch_size = len(imgs)
         inputs = torch.stack(imgs).permute(0,2,3,1)
-        # inputs = imgs.permute(0, 2, 3, 1)
         inputs = self.image_super_resolution_processor(inputs, return_tensors="pt").to(device)
 
         # forward pass
@@ -376,7 +374,6 @@ class SeqCombine:
             output = np.moveaxis(output, source=0, destination=-1)
             output = (output * 255.0).round().astype(np.uint8)  # float32 to uint8
             reformed_outputs.append(torch.from_numpy(output).permute(2,0,1))
-        # reformed_outputs = torch.stack(reformed_outputs)
         return reformed_outputs
     
     def vqa(self, input_data, device):
@@ -516,11 +513,11 @@ class SeqCombine:
             s = s.strip()
             if len(s) == 0:
                 s = ' '
-            inputs = self.text_generation_tokenizer(s, return_tensors="pt", truncation=True, max_length=512).to(device)#, padding=True).to(device)
+            inputs = self.text_generation_tokenizer(s, return_tensors="pt", truncation=True, padding=True, max_length=512).to(device)
 
             # Get the outputs from the model
             with torch.no_grad():
-                outputs = self.text_generator.generate(**inputs, max_new_tokens=30) #max_length=30, pad_token_id=50256)
+                outputs = self.text_generator.generate(**inputs, max_new_tokens=30)
 
             # Decode the outputs to get the generated text
             generated_s = self.text_generation_tokenizer.decode(outputs[0])
@@ -596,7 +593,6 @@ class SeqCombine:
 
                 restored = torch.from_numpy(restored)
                 restoreds.append(restored)
-            # restoreds = torch.stack(restoreds)
             #print(restored)
             return restoreds
     
@@ -631,6 +627,5 @@ class SeqCombine:
                 restored = torch.from_numpy(restored)
                 restoreds.append(restored)
                 #print(restored)
-            # restoreds = torch.stack(restoreds)
             return restoreds
         

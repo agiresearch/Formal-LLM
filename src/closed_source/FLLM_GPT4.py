@@ -68,7 +68,7 @@ def get_valid_response(max_num):
         response = client.chat.completions.create(
             model="gpt-4",
             messages=messages,
-            temperature=0,
+            temperature=temperature,
             max_tokens=25,
             top_p=1,
             frequency_penalty=0,

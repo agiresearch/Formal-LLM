@@ -55,7 +55,7 @@ def module_seq_filter(module_seq, task_id):
                 "Sentiment Analysis":['text','text'],
                 "Text to Image Generation":['text','image'],
                 "Question Answering":['text-text','text'],
-                "Visual Question Answering,":['image-text','text']
+                "Visual Question Answering":['image-text','text']
         }
     module_seq_list = module_seq.split(", ")
     input_type = io_dict[module_seq_list[0]][0]
@@ -92,7 +92,7 @@ def whole_module_seq_filter(module_seq, task_id):
                 "Sentiment Analysis":['text','text'],
                 "Text to Image Generation":['text','image'],
                 "Question Answering":['text-text','text'],
-                "Visual Question Answering,":['image-text','text']
+                "Visual Question Answering":['image-text','text']
         }
     module_seq_list = module_seq.split(", ")
     condition_1 = None

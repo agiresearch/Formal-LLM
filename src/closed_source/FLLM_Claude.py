@@ -71,7 +71,7 @@ def get_valid_response(max_num):
             model="claude-2",
             max_tokens_to_sample=100,
             prompt=messages,
-            temperature=0,
+            temperature=temperature,
             stop_sequences=["."]
         )
 
