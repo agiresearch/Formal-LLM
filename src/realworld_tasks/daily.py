@@ -46,22 +46,21 @@ def calculate_possible_tools(time):
         if tool in current_plan:
             continue
         if tool == 'Eating breakfast.':
-            if (stack.endswith('E') or stack.endswith('EH')) and len(meal_stack) == 0:
+            if 'E' in stack and 'F' not in stack and len(meal_stack) == 0:
                 result.append(tool)
         elif tool == 'Eating lunch.':
-            if (stack.endswith('Z') or stack.endswith('ZH')) and len(meal_stack) == 0:
+            if 'Z' in stack and 'F' not in stack and len(meal_stack) == 0:
                 result.append(tool)
         elif tool == 'Eating supper.':
-            if (stack.endswith('D') or stack.endswith('DH'))  and len(meal_stack) == 0:
+            if 'D' in stack and 'F' not in stack and len(meal_stack) == 0:
                 result.append(tool)
         elif tool == 'Playing basketball.':
-            if time == 15 and not stack.endswith('H'):
+            if time == 15:
                 result.append(tool)
         elif tool == 'Grocery shopping.':
-            if not stack.endswith('H'):
-                result.append(tool)
+            result.append(tool)
         elif tool == 'Turning on the washer/laundry machine.':
-            if time != 20:
+            if 'H' in stack:
                 result.append(tool)
         else:
             result.append(tool)
@@ -176,13 +175,15 @@ while True:
         stack = stack.replace('H', '')
         meal_stack += 'F' * 3
     elif selection == 'Turning on the washer/laundry machine.':
-        stack += 'H'
+        stack = stack.replace('H', '')
     else:
         meal_stack = meal_stack[:-worktime[selection]]
         if selection == 'Playing basketball.':
             stack += 'F'
         elif selection in ['House cleaning.', 'Doing homework.', 'Doing nothing for one hour.']:
             stack = stack.replace('H', '')
+            stack += 'H'
             stack = stack.replace('F', '')
         elif selection == 'Grocery shopping.':
             stack = stack.replace('F', '')
+            stack = stack.replace('H', '')
